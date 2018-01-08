@@ -1,23 +1,30 @@
 package com.resource;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 
 @XmlRootElement(name = "transaction")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Transaction {
+public class Transaction implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+    
+	@XmlElement(name = "amount")
 	private double amount;
-	private long tranID;
+	private Long tranID;
 	private String type;
-	private long parentID;
+	private Long parentID;
 	
 	public Transaction() {
 		
 	}
 	
-	public Transaction (long tranID, double amount, String type, long parentID) {
+	public Transaction (Long tranID, double amount, String type, Long parentID) {
 		
 		this.tranID = tranID;
 		this.amount = amount;
@@ -26,16 +33,16 @@ public class Transaction {
 		
 	}
 	
-	public Transaction (long tranID, double amount, String type) {
-		
-		this.tranID = tranID;
-		this.amount = amount;
-		this.type = type;
-		this.parentID = -999;
-		
-	}
+//	public Transaction (Long tranID, double amount, String type) {
+//		
+//		this.tranID = tranID;
+//		this.amount = amount;
+//		this.type = type;
+//		this.parentID = -999.99;
+//		
+//	}
 	
-	public long getTranID () {
+	public Long getTranID () {
 		return tranID;
 	}
 	
@@ -47,11 +54,11 @@ public class Transaction {
 		return type;
 	}
 	
-	public long getParentID () {
+	public Long getParentID () {
 		return parentID;
 	}
 	
-	public void setTranID (long tranID) {
+	public void setTranID (Long tranID) {
 		this.tranID = tranID;
 		
 	}
@@ -65,7 +72,7 @@ public class Transaction {
 		this.type = type;
 	}
 	
-	public void setParentID (long parentID) {
+	public void setParentID (Long parentID) {
 
 		this.parentID = parentID;
 	}
