@@ -1,0 +1,5 @@
+tranID,amount,type,parent,sum
+110001,1000,housing,NaN,1300
+110002,200,car,NaN,200
+110003,300,mortgage,110001,1300
+110004,200,car,NaN,200

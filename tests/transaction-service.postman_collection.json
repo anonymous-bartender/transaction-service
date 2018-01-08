@@ -1,0 +1,479 @@
+{
+	"info": {
+		"name": "transaction-service",
+		"_postman_id": "a63067e8-923b-ea94-ba2a-ebf3e2f2a57a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "basicpingtest",
+			"description": "",
+			"item": [
+				{
+					"name": "{{protocol}}{{host}}:{{port}}{{basedir}}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{protocol}}{{host}}:{{port}}{{basedir}}",
+							"host": [
+								"{{protocol}}{{host}}"
+							],
+							"port": "{{port}}{{basedir}}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TestData",
+			"description": "",
+			"item": [
+				{
+					"name": "Test Data",
+					"description": "",
+					"item": [
+						{
+							"name": "Test Data Generation",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "dc915969-da98-4460-9b3f-a9a65ce9601e",
+										"type": "text/javascript",
+										"exec": [
+											"tests[\"Status is ACCEPTED\"] = responseCode.code === 202;",
+											"var jsonData = JSON.parse(responseBody);",
+											"tests[\"Assert Status\"] = jsonData.status === \"success\";"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"amount\":{{amount}},\n\t\"type\":{{type}},\n\t\"parent_id\" : {{parent}}\n}"
+								},
+								"url": {
+									"raw": "{{protocol}}{{host}}:{{port}}{{basedir}}/transaction/{{tranID}}",
+									"host": [
+										"{{protocol}}{{host}}"
+									],
+									"port": "{{port}}{{basedir}}",
+									"path": [
+										"transaction",
+										"{{tranID}}"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Tests",
+					"description": "",
+					"item": [
+						{
+							"name": "Validate sum of tran 110001",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c766f364-94c2-458e-9771-7b5552314b56",
+										"type": "text/javascript",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"tests[\"Validate the sum is correct. Actual:\"+jsonData.sum+\" Expected:\"+data.sum] = jsonData.sum === data.sum;"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "{{protocol}}{{host}}:{{port}}{{basedir}}/sum/{{tranID}}",
+									"host": [
+										"{{protocol}}{{host}}"
+									],
+									"port": "{{port}}{{basedir}}",
+									"path": [
+										"sum",
+										"{{tranID}}"
+									]
+								},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "TestData1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0b9d103b-983d-4ecf-81fc-6a7677c808ba",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status is ACCEPTED\"] = responseCode.code === 202;",
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Assert Status\"] = jsonData.status === \"success\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"amount\" : 1000.00,\n\t\"type\":\"housing\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}{{host}}:{{port}}{{basedir}}/transaction/110001",
+							"host": [
+								"{{protocol}}{{host}}"
+							],
+							"port": "{{port}}{{basedir}}",
+							"path": [
+								"transaction",
+								"110001"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "TestData2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d5cf9f45-ebc9-46b6-bce0-a27c9a1f5ca2",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status is ACCEPTED\"] = responseCode.code === 202;",
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Assert Status\"] = jsonData.status === \"success\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"amount\" : 1000.00,\n\t\"type\":\"housing\",\n\t\"parent_id\":110003\n\t\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}{{host}}:{{port}}{{basedir}}/transaction/110002",
+							"host": [
+								"{{protocol}}{{host}}"
+							],
+							"port": "{{port}}{{basedir}}",
+							"path": [
+								"transaction",
+								"110002"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "TestData3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "94226411-5244-40c3-a284-d1cf3a926847",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status is ACCEPTED\"] = responseCode.code === 202;",
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Assert Status\"] = jsonData.status === \"success\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"amount\" : 300.00,\n\t\"type\":\"mortgage\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}{{host}}:{{port}}{{basedir}}/transaction/110003",
+							"host": [
+								"{{protocol}}{{host}}"
+							],
+							"port": "{{port}}{{basedir}}",
+							"path": [
+								"transaction",
+								"110003"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "TestData4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2a078ae5-15fc-46ad-a0e0-708ecb35863f",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status is ACCEPTED\"] = responseCode.code === 202;",
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Assert Status\"] = jsonData.status === \"success\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"amount\" : 1000.00,\n\t\"type\":\"housing\",\n\t\"parent_id\":110003\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}{{host}}:{{port}}{{basedir}}/transaction/110004",
+							"host": [
+								"{{protocol}}{{host}}"
+							],
+							"port": "{{port}}{{basedir}}",
+							"path": [
+								"transaction",
+								"110004"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "TestData5",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e9ae4010-48b8-4c69-8d0c-d442f4d42226",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status is ACCEPTED\"] = responseCode.code === 202;",
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Assert Status\"] = jsonData.status === \"success\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"amount\" : 800.00,\n\t\"type\":\"car\"\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}{{host}}:{{port}}{{basedir}}/transaction/110005",
+							"host": [
+								"{{protocol}}{{host}}"
+							],
+							"port": "{{port}}{{basedir}}",
+							"path": [
+								"transaction",
+								"110005"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test",
+			"description": "",
+			"item": [
+				{
+					"name": "Gather details of tran 110001",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "985f4e8b-08cc-4b9c-834c-2cc97cf93e5f",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Transaction is Present\"] = jsonData.data.id !== null ;",
+									"var transactions = jsonData.transaction;",
+									"var isPresent = false;",
+									"var tran;",
+									"",
+									"for(var i = 0; i < transactions.length; i++)",
+									"{",
+									"  if(transactions[i].tranID == 110001)",
+									"  {",
+									"      ispresent= true;",
+									"      tran=transaction[i];",
+									"  }",
+									"}",
+									"",
+									"//fail",
+									"",
+									"if(tran.isparent !== null) {",
+									"    ",
+									"}",
+									"",
+									"",
+									"    postman.setEnvironmentVariable(\"tranID\",110001);",
+									"    postman.setEnvironmentVariable(\"tranID\",transactions[i].);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{protocol}}{{host}}:{{port}}{{basedir}}/",
+							"host": [
+								"{{protocol}}{{host}}"
+							],
+							"port": "{{port}}{{basedir}}",
+							"path": [
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Gather details of type cars",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{protocol}}{{host}}:{{port}}{{basedir}}/",
+							"host": [
+								"{{protocol}}{{host}}"
+							],
+							"port": "{{port}}{{basedir}}",
+							"path": [
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Validate trans under type car",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{protocol}}{{host}}:{{port}}{{basedir}}/",
+							"host": [
+								"{{protocol}}{{host}}"
+							],
+							"port": "{{port}}{{basedir}}",
+							"path": [
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Gather parent tran of tran 110003",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{protocol}}{{host}}:{{port}}{{basedir}}/",
+							"host": [
+								"{{protocol}}{{host}}"
+							],
+							"port": "{{port}}{{basedir}}",
+							"path": [
+								""
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "basicpingtest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": ""
+				},
+				"description": "Verify the app is up and running"
+			},
+			"response": []
+		}
+	]
+}
