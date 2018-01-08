@@ -46,17 +46,20 @@ public class AppDAO {
 
 	public static double getSum(Long id) {
 
-		double sum = 0.0;
+		double sum = 0.00;
 		
 		Long parent = transactionMap.get(id).getParentID();
 			
 		if(parent != -999) {
 			Collection<Transaction> c = transactionMap.values();
-			for(Transaction t:c) {
-				if(t.getParentID().equals(parent) || t.getTranID().equals(parent)
-				|| (t.getParentID().equals(parent) && !t.getTranID().equals(parent)) )
-				sum += t.getAmount();
+			
+			for(Transaction currentNode:c) {
+				
+				if(currentNode.getTranID().equals(parent) || currentNode.getParentID().equals(parent))
+					sum += currentNode.getAmount();
+	
 			}
+			
 		}
 		else 
 			sum = transactionMap.get(id).getAmount();

@@ -60,9 +60,9 @@ public class App {
 
 
 		try {
-//			if(parent==null) AppDAO.addEntry(id, amount, type);
-//			else AppDAO.addEntry(id, amount, type, parent);
-			
+			//			if(parent==null) AppDAO.addEntry(id, amount, type);
+			//			else AppDAO.addEntry(id, amount, type, parent);
+
 			AppDAO.addEntry(id, amount, type, parent);
 		}
 		catch(TransactionException e) {
@@ -70,7 +70,7 @@ public class App {
 
 		return Response.status(Status.ACCEPTED).entity(RESPONSE_SUCCESS).build();
 	}
-	
+
 	@GET
 	@Path("/transaction/{id}")
 	@Produces({ MediaType.APPLICATION_JSON})
@@ -97,30 +97,31 @@ public class App {
 	@Path("/sum/{id}")
 	@Produces({ MediaType.APPLICATION_JSON})
 	public String getTranSum(@PathParam("id") Long id) {
-		
-//		Sum sum = new Sum();
-//		sum.setSum(AppDAO.getSum(id));
-//		return sum;
-		
-		
+
+		//		Sum sum = new Sum();
+		//		sum.setSum(AppDAO.getSum(id));
+		//		return sum;
+		if(!AppDAO.isTransactionPresent(id))
+			return RESPONSE_FAILURE;
+
 		double sum = AppDAO.getSum(id);
-//		String sum_toString = String.format("%1$,.2f",sum);
-//		
-//		
-//		JSONObject response = new JSONObject();
-//		
-//	    response.put("sum", decimalFormat.format(sum));
-//		System.out.println(response.toString());
-//			return response.toString();
-			return "{\"sum\":"+decimalFormat.format(sum)+"}";
+		//		String sum_toString = String.format("%1$,.2f",sum);
+		//		
+		//		
+		//		JSONObject response = new JSONObject();
+		//		
+		//	    response.put("sum", decimalFormat.format(sum));
+		//		System.out.println(response.toString());
+		//			return response.toString();
+		return "{\"sum\":"+decimalFormat.format(sum)+"}";
 
 	}
-	
+
 	@DELETE
 	@Path("/transaction/{id}")
 	@Produces({ MediaType.APPLICATION_JSON})
 	public String deleteEntry (@PathParam("id") Long id) {
-		
+
 		AppDAO.deleteEntry(id);		
 		return RESPONSE_SUCCESS;
 	}
