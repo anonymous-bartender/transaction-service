@@ -1,0 +1,44 @@
+{
+	"variables": [],
+	"info": {
+		"name": "test-data",
+		"_postman_id": "788d5d3d-4e2a-fa2c-a024-ce5ce7221ab3",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test Data Generation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status is ACCEPTED\"] = responseCode.code === 202;",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Assert Status\"] = jsonData.status === \"success\";"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{protocol}}{{host}}:{{port}}{{basedir}}/transaction/{{tranID}}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"amount\":{{amount}},\n\t\"type\":{{type}},\n\t\"parent_id\" : {{parent}}\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

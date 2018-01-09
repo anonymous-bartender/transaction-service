@@ -1,0 +1,81 @@
+{
+	"variables": [],
+	"info": {
+		"name": "test-cases",
+		"_postman_id": "f5cf1515-677a-1b5a-ce3b-38a58d51b937",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Validation of Transaction",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Amount of the transaction is correct\"] = jsonData.amount = data.amount;",
+							"tests[\"Type of the transaction is correct\"] = jsonData.type = data.type;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{protocol}}{{host}}:{{port}}{{basedir}}/transaction/{{tranID}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Validation of Sum function",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"tests [\"Validate the sum is correct. Actual:\"+jsonData.sum+\" Expected:\"+data.sum] = jsonData.sum === data.sum;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{protocol}}{{host}}:{{port}}{{basedir}}/sum/{{tranID}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Validation of Same types",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(data.type,JSON.stringify(jsonData));"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{protocol}}{{host}}:{{port}}{{basedir}}/types/car",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
