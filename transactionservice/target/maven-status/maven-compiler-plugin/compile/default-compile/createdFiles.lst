@@ -1,5 +1,0 @@
-com\dao\AppDAO.class
-com\resource\Transaction.class
-com\resource\Sum.class
-com\dao\TransactionException.class
-com\main\App.class
