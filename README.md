@@ -6,18 +6,11 @@ This project consists of `maven project` running REST app with `JAX-RS` top of `
 mvn jetty:run
 ```
 
-### Structure
+## Structure
+### REST Server (maven)
 
 ```
-transaction-service/
-├── README.md
-├── tests
-│   ├── input.csv
-│   ├── local_env.postman_environment.json
-│   ├── test-cases.postman_collection.json
-│   ├── test-data.postman_collection.json
-│   └── transaction-service.postman_collection.json
-└── transactionservice
+── transactionservice
     ├── pom.xml
     └── src
         ├── main
@@ -39,4 +32,14 @@ transaction-service/
                 └── transaction
                     ├── BasicPingTest.java
                     └── Hooks.java
+```
+### API Tests (Postman Collections)
+```
+transaction-service/
+└── tests
+   ├── input.csv
+   ├── local_env.postman_environment.json
+   ├── test-cases.postman_collection.json
+   ├── test-data.postman_collection.json
+   └── transaction-service.postman_collection.json
 ```
