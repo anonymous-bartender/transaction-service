@@ -1,5 +1,10 @@
-# transaction-service
-A small demo showing transaction services written in JAX-RS and JAVA. API tests are written in Postman.
+# A REST API application with api tests
+This project consists of `maven project` running REST app with `JAX-RS` top of `Jetty Server`. API tests are written separately with POSTMAN app. 
+
+## Run Server
+```
+mvn jetty:run
+```
 
 ### Structure
 
